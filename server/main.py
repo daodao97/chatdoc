@@ -10,7 +10,7 @@ import uvicorn
 from pydantic import BaseModel
 
 app = FastAPI()
-origins = ["http://127.0.0.1", "http://localhost:5173"]
+origins = ["http://127.0.0.1", "http://localhost:5173", "http://10.23.172.12:5173"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -101,4 +101,4 @@ def file_task(doc_id: str):
 
 
 if __name__ == '__main__':
-    uvicorn.run('main:app', reload=True)
+    uvicorn.run('main:app', host="0.0.0.0", reload=True)

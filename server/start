@@ -3,5 +3,5 @@ set -e
 
 echo "Starting Python server..."
 
-# pip install -r requirements.txt
+pip install -r requirements.txt
 OPENAI_API_KEY=$1 python3 main.py

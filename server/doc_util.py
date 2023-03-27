@@ -17,6 +17,25 @@ llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0.2, model_name="gpt-3.5
 CJKPDFReader = download_loader("CJKPDFReader")
 SimpleWebPageReader = download_loader("SimpleWebPageReader")
 
+QUESTION_ANSWER_PROMPT_TMPL_2 = """
+You are an AI assistant providing helpful advice. You are given the following extracted parts of a long document and a question. Provide a conversational answer based on the context provided.
+If you can't find the answer in the context below, just say "Hmm, I'm not sure." Don't try to make up an answer.
+If the question is not related to the context, politely respond that you are tuned to only answer questions that are related to the context.
+Context information is below.
+=========
+{context_str}
+=========
+{query_str}
+"""
+
+QA_PROMPT_TMPL = (
+        "Context information is below. \n"
+        "---------------------\n"
+        "{context_str}"
+        "\n---------------------\n"
+        "{query_str}\n"
+)
+
 class Doc:
     def __init__(
             self,
@@ -81,13 +100,7 @@ class Doc:
         new_index = GPTSimpleVectorIndex.load_from_disk(self.index_file)
 
         query_str = question
-        QA_PROMPT_TMPL = (
-             "Context information is below. \n"
-             "---------------------\n"
-             "{context_str}"
-             "\n---------------------\n"
-             "{query_str}\n"
-        )
+
         QA_PROMPT = QuestionAnswerPrompt(QA_PROMPT_TMPL)
 
         # 查询索引
@@ -96,7 +109,7 @@ class Doc:
             text_qa_template=QA_PROMPT,
             # response_mode="tree_summarize",
             # similarity_top_k=3,
-            # mode=QueryMode.EMBEDDING
+            mode=QueryMode.EMBEDDING
         )
 
         # 打印答案
@@ -114,16 +127,7 @@ class Doc:
         else:
             index = GPTSimpleVectorIndex.load_from_disk(index_file)
 
-        QUESTION_ANSWER_PROMPT_TMPL_2 = """
-You are an AI assistant providing helpful advice. You are given the following extracted parts of a long document and a question. Provide a conversational answer based on the context provided.
-If you can't find the answer in the context below, just say "Hmm, I'm not sure." Don't try to make up an answer.
-If the question is not related to the context, politely respond that you are tuned to only answer questions that are related to the context.
-Context information is below.
-=========
-{context_str}
-=========
-{query_str}
-"""
+
 
         QUESTION_ANSWER_PROMPT = QuestionAnswerPrompt(QUESTION_ANSWER_PROMPT_TMPL_2)
 

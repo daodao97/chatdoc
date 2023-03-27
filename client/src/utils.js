@@ -47,7 +47,7 @@ export function docType(doc) {
 export function docUrl(doc) {
     let base = location.origin
     if (import.meta.env.DEV) {
-        base = 'http://127.0.0.1:8000'
+        base = `http://${location.hostname}:8000`
     }
 
     if (doc['doc_type'] == "application/pdf") {

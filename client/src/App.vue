@@ -317,8 +317,8 @@ const onerror = (e) => {
       border: 1px solid blue;
       background-image: url('assets/send.svg');
       background-repeat: no-repeat;
-      background-position: 370px;
-      padding-left: 20px;
+      background-position: 10px;
+      padding-left: 40px;
     }
 
     .loading {

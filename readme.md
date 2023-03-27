@@ -5,6 +5,7 @@
 - `.pdf`
 - `.epub`
 - `.md`
+- `.txt`
 - `网页`
 
 ![preview](./preview.png)
@@ -13,7 +14,6 @@
 
 ```shell
 cd server
-pip install -r requirements.txt
 ./start {OPEN_AI_KEY}
 ```
 
@@ -21,6 +21,5 @@ pip install -r requirements.txt
 
 ```shell
 cd client
-pnpm i
-pnpm dev
+./start
 ```

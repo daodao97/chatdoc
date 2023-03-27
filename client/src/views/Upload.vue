@@ -7,8 +7,6 @@
     </el-upload>
 </template>
 <script setup>
-import { defineEmits } from 'vue'
-
 const emit = defineEmits(['uploadSuccess'])
 const supportFileType = ['application/pdf', 'application/epub+zip', 'text/markdown', 'text/plain']
 const beforeUpload = (rawFile) => {

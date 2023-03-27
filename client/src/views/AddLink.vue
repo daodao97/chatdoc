@@ -6,7 +6,6 @@
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { fetchAddLink } from '../api'
-import { defineEmits } from 'vue'
 const emit = defineEmits(['uploadSuccess'])
 const open = () => {
     ElMessageBox.prompt('', '输入链接', {
