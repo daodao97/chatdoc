@@ -16,7 +16,7 @@ services:
     image: node
     container_name: chatdoc-frontend
     ports:
-      - '8001:5173'
+      - '5173:5173'
     links:
       - backend 
     volumes:

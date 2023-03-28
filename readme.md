@@ -23,3 +23,9 @@ cd server
 cd client
 ./start
 ```
+
+## Docker
+
+```shell
+docker-compose up
+```
