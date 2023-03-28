@@ -1,1 +1,3 @@
 server/data
+server/database.db
+client/.pnpm-store/

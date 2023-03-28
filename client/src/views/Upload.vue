@@ -8,9 +8,10 @@
 </template>
 <script setup>
 const emit = defineEmits(['uploadSuccess'])
-const supportFileType = ['application/pdf', 'application/epub+zip', 'text/markdown', 'text/plain']
+const supportFileType = ['application/pdf', 'application/epub+zip', 'text/markdown', 'text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
 const beforeUpload = (rawFile) => {
   if (!supportFileType.includes(rawFile.type)) {
+    console.log(rawFile.type)
     ElMessage.error('仅支持 .pdf, .epub, .md, .txt 类型文件')
     return false
   } else if (rawFile.size / 1024 / 1024 > 2) {

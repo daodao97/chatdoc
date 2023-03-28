@@ -9,6 +9,7 @@ from ebooklib import epub
 from epub2txt import epub2txt
 from langchain.chat_models import ChatOpenAI
 from llama_index import download_loader
+import docx2txt
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logging.getLogger().addHandler(logging.StreamHandler(stream=sys.stdout))
@@ -64,6 +65,8 @@ class Doc:
             self.extract_pdf()
         if doc_type == 'text/plain' or doc_type == 'text/markdown':
             self.data_file = self.file_path
+        if doc_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+            self.extra_docx()
 
     def extract_epub(self):
         res = epub2txt(self.file_path)
@@ -79,6 +82,11 @@ class Doc:
                 page = reader.pages[i]
                 text = page.extract_text()
                 file.write(text)
+
+    def extra_docx(self):
+        res = docx2txt.process(self.file_path)
+        with open(self.data_file, "a") as file:
+            file.write(res)
 
     def build_index(self, doc_type: str):
         if doc_type == 'web':

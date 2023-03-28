@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="polyfill.min.js"></script>
+    <script src="jszip.min.js"></script>
+    <script src="docx-preview.js"></script>
+</head>
+
+<body>
+    <div id="container"></div>
+</body>
+
+<script>
+    var params = URLSearchParams && new URLSearchParams(document.location.search.substring(1));
+    var url = params && params.get("url") && decodeURIComponent(params.get("url"));
+    url && fetch(url).then(res => res.blob()).then(body => {
+        console.log(body)
+        renderDocx(body)
+    })
+    function renderDocx(file) {
+        docData = file;
+
+        if (!docData)
+            return;
+
+        docx.renderAsync(docData, document.getElementById("container"))
+        .then(x => console.log("docx: finished"));
+    }
+</script>
+
+</html>

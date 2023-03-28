@@ -34,7 +34,7 @@ function loadMsg() {
     } else {
       messages.value = res.data || []
     }
-    showLastMessage()
+    showLastMessage(1000)
   })
 }
 

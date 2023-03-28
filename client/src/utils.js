@@ -42,6 +42,12 @@ export function docType(doc) {
     if (doc['doc_type'] == "text/markdown") {
         return 'md'
     }
+    if (doc['doc_type'] == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+        return 'docx'
+    }
+    if (doc['doc_type'] == "web") {
+        return 'web'
+    }
 }
 
 export function docUrl(doc) {
@@ -62,18 +68,21 @@ export function docUrl(doc) {
     if (doc['doc_type'] == "text/plain") {
         return `${base}/static/${doc.doc_id}/${doc.doc_name}`
     }
+    if (doc['doc_type'] == "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+        return "docx/index.html?url=" + decodeURIComponent(`${base}/static/${doc.doc_id}/${doc.doc_name}`)
+    }
     if (doc['doc_type'] == "web") {
         return doc.doc_name
     }
 
 }
 
-export function showLastMessage() {
+export function showLastMessage(after) {
     setTimeout(() => {
         const element = document.getElementsByClassName('message-item');
         element.length > 0 && element[element.length - 1].scrollIntoView({
             block: 'center', // 值有start,center,end,nearest，当前显示在视图区域中间
             behavior: 'smooth' // 值有auto,instant,smooth，缓动动画（当前是慢速的）
         })
-    }, 100)
+    }, after || 100)
 }
