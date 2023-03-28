@@ -9,7 +9,7 @@ services:
       - |
         pip install --upgrade pip
         cd /data
-        ./start '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'
+        ./start '{OPEN_AI_KEY}'
     volumes:
       - ./server:/data
   frontend:

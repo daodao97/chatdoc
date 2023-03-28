@@ -23,5 +23,6 @@ cd client
 ## Docker
 
 ```shell
+# 请先替换 docker-compose.yml 中的 OPEN_AI_KEY
 docker-compose up
 ```
