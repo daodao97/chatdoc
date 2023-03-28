@@ -109,7 +109,7 @@ class Doc:
             text_qa_template=QA_PROMPT,
             # response_mode="tree_summarize",
             # similarity_top_k=3,
-            mode=QueryMode.EMBEDDING
+            # mode=QueryMode.EMBEDDING
         )
 
         # 打印答案
