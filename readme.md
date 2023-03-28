@@ -13,6 +13,7 @@
 ## 启动后端
 
 ```shell
+# my local python version 3.9.7
 cd server
 ./start {OPEN_AI_KEY}
 ```
@@ -20,6 +21,7 @@ cd server
 ## 启动前端
 
 ```shell
+# my local node version v16.11.0
 cd client
 ./start
 ```
