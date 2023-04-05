@@ -14,7 +14,7 @@ origins = ["http://127.0.0.1", "http://localhost:5173", "http://10.23.172.12:517
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # 设置允许的origins来源
+    allow_origins=["*"],  # 设置允许的origins来源
     allow_credentials=True,
     allow_methods=["*"],  # 设置允许跨域的http方法，比如 get、post、put等。
     allow_headers=["*"])  # 允许跨域的headers，可以用来鉴别来源等作用。
