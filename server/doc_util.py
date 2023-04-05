@@ -106,26 +106,6 @@ class Doc:
         index = GPTSimpleVectorIndex(documents)
         index.save_to_disk(self.index_file)
 
-    def query1(self, question: str):
-        # 加载索引
-        new_index = GPTSimpleVectorIndex.load_from_disk(self.index_file)
-
-        query_str = question
-
-        QA_PROMPT = QuestionAnswerPrompt(QA_PROMPT_TMPL)
-
-        # 查询索引
-        response = new_index.query(
-            query_str,
-            text_qa_template=QA_PROMPT,
-            response_mode="tree_summarize",
-            similarity_top_k=3,
-            mode=QueryMode.EMBEDDING
-        )
-
-        # 打印答案
-        return response
-
     def query(self, question: str):
         print("query2", self.index_file, self.file_path)
         loader = CJKPDFReader()
@@ -146,5 +126,28 @@ class Doc:
             llm_predictor=llm_predictor,
             text_qa_template=QUESTION_ANSWER_PROMPT,
             # response_mode="tree_summarize",
+            similarity_top_k=3,
+        )
+
+    def query2(self, question: str):
+        print("query2", self.index_file, self.file_path)
+        loader = CJKPDFReader()
+        index_file = self.index_file
+
+        if os.path.exists(index_file) == False:
+            documents = loader.load_data(file=self.file_path)
+            index = GPTSimpleVectorIndex(documents)
+            index.save_to_disk(index_file)
+        else:
+            index = GPTSimpleVectorIndex.load_from_disk(index_file)
+
+        QUESTION_ANSWER_PROMPT = QuestionAnswerPrompt(
+            QUESTION_ANSWER_PROMPT_TMPL_2)
+
+        return index.query(
+            query_str=question,
+            llm_predictor=llm_predictor,
+            text_qa_template=QUESTION_ANSWER_PROMPT,
+            response_mode="tree_summarize",
             similarity_top_k=3,
         )
