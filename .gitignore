@@ -1,3 +1,5 @@
 server/data
 server/database.db
 client/.pnpm-store/
+
+server/__pycache__/
